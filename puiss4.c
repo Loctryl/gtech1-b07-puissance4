@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-char tab[NBL][NBC];
-
 void init(void) {
+  int NBL, NBC;
+  char tab[NBL][NBC];
   for(int l=0; l<NBL; l++) {
     for(int c=0; c<NBC; c++) {
       tab[l][c] = '.';
