@@ -2,6 +2,6 @@
 int main(void){
 
   printf("Aled");
-  printf("Oskour");
+  printf("Osk");
 
 }
