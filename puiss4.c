@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void init(void) {
+char init(void) {
   int NBL, NBC;
   char tab[NBL][NBC];
   for(int l=0; l<NBL; l++) {
@@ -8,10 +8,13 @@ void init(void) {
       tab[l][c] = '.';
     }
   }
+  return tab[NBL][NBC];
 }
 
-void main(void) {
+int main(void) {
   // Init du jeu:
-  init();
+  char tab;
+  tab = init();
   // Boucle du jeu:
+  return 0;
 }
