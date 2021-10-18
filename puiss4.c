@@ -2,7 +2,8 @@
 #define NBL 6
 #define NBC 7
 
-char** tab[NBL][NBC];
+char tab[NBL][NBC];
+char token [] = "ox";
 int joueur;
 
 void init(void) {
@@ -14,6 +15,7 @@ void init(void) {
 }
 
 void disp(void){
+
   printf("  _ _ _ _ _ _ _ ");
   for(int l=0; l<NBL; l++) {
     printf(" \n|");
@@ -37,6 +39,7 @@ int statusgame(void){
 
   for(int l=0; l<NBL; l++) {
     for(int c=0; c<NBC; c++) {
+      printf("%c",tab[l][c]);
       if (tab[l][c] != '.'){
         count ++;
       }
@@ -52,13 +55,18 @@ void main(void) {
   // Init du jeu:
   init();
   disp();
+  int colonne, code_retour;
   // Boucle du jeu:
   while(statusgame() == 0){
     int colonne, code_retour;
+    int i = 7 ;
     do {
       code_retour = scanf("%d", &colonne);
     } while (0<code_retour<8);{
-        return 0;
+        while (tab[i][code_retour] != '.'){
+          i --;
+        }
+        tab[i][code_retour] = token[joueur];
     }
   }
 }
