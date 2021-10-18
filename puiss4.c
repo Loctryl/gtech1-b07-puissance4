@@ -1,29 +1,72 @@
 #include <stdio.h>
+#define NBL 6
+#define NBC 7
+
+
+char tab[NBL][NBC];
+char token [] = "ox";
+int joueur;
 
 void init(void) {
-  int NBL, NBC;
-  char tab[NBL][NBC];
   for(int l=0; l<NBL; l++) {
     for(int c=0; c<NBC; c++) {
       tab[l][c] = '.';
     }
   }
-  return tab;
 }
 
-char aff(tab){
-  int NBL, NBC;
-  int game = tab;
+void disp(void){
+
+  printf("  _ _ _ _ _ _ _ ");
+  for(int l=0; l<NBL; l++) {
+    printf(" \n|");
+    for(int c=0; c<NBC; c++) {
+      printf(" %c",tab[l][c]);
+    }
+    printf(" |");
+  }
+  printf("\n  - - - - - - - ");
+}
+
+int statusgame(void){
+  int count = 0;
+  int align = 0;
+
+  //game won
+
+  if (align == 4){
+    return 2 ; 
+  }
+
   for(int l=0; l<NBL; l++) {
     for(int c=0; c<NBC; c++) {
-        printf("%c", game[l][c]);
+      printf("%c",tab[l][c]);
+      if (tab[l][c] != '.'){
+        count ++;
+      }
     }
   }
+  if (count == 42){
+    return 1;
+  }
+  return 0;
 }
 
-int main(void) {
+void main(void) {
   // Init du jeu:
   init();
-  char token[] = "xo";
+  disp();
   // Boucle du jeu:
+  while(statusgame() == 0){
+    int colonne, code_retour;
+    int i = 7 ;
+    do {
+      code_retour = scanf("%d", &colonne);
+    } while (0<code_retour<8);{
+        while (tab[i][code_retour] != '.'){
+          i --;
+        }
+        tab[i][code_retour] = token[joueur];
+    }
+  }
 }
