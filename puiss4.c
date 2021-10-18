@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-char init(void) {
+void init(void) {
   int NBL, NBC;
   char tab[NBL][NBC];
   for(int l=0; l<NBL; l++) {
@@ -8,13 +8,22 @@ char init(void) {
       tab[l][c] = '.';
     }
   }
-  return tab[NBL][NBC];
+  return tab;
+}
+
+char aff(tab){
+  int NBL, NBC;
+  int game = tab;
+  for(int l=0; l<NBL; l++) {
+    for(int c=0; c<NBC; c++) {
+        printf("%c", game[l][c]);
+    }
+  }
 }
 
 int main(void) {
   // Init du jeu:
-  char tab;
-  tab = init();
+  init();
+  char token[] = "xo";
   // Boucle du jeu:
-  return 0;
 }
