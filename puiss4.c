@@ -5,7 +5,8 @@
 
 char tab[NBL][NBC];
 char token [] = "ox";
-int joueur;
+int joueur = 0;
+int count = 0;
 
 void init(void) {
   for(int l=0; l<NBL; l++) {
@@ -25,53 +26,77 @@ void disp(void){
     }
     printf(" |");
   }
-  printf("\n  1 2 3 4 5 6 7 ");
+  printf("\n  1 2 3 4 5 6 7 \n");
 }
 
-int statusgame(void){
-  int count = 0;
+int statusgame(){
+  printf("Je rentre dans la status de la game\n");
   int align = 0;
-  printf("\nj'uis dans le status de la game\n");
-
-  //game won
-
-  if (align == 4){
-    return 2 ; 
-  }
-  for(int l=0; l<NBL; l++) {
+  if (count>6){
+    printf("Je suis dans la condition");
+    for(int l=0; l<NBL; l++) {
+      for(int c=0; c<5; c++) {
+        if (tab[l][c] == token[joueur] && tab[l][c+1] == token[joueur] && tab[l][c+2] == token[joueur] && tab[l][c+3] == token[joueur]){
+          printf("Je suis 1");
+          return 1;
+        } 
+      }  
+    }
     for(int c=0; c<NBC; c++) {
-      if (tab[l][c] != '.'){
-        count ++;
+      for(int l=0; l<4; l++) {
+        if (tab[l][c] == token[joueur] && tab[l+1][c] == token[joueur] && tab[l+2][c] == token[joueur] && tab[l+3][c] == token[joueur]){
+          printf("Je suis 2");
+          return 1;
+        } 
+      }
+    }
+    for(int c=6; c>2; c--) {
+      for(int l=0; l<2; l++) {
+        if (tab[l][c] == token[joueur] && tab[l+1][c-1] == token[joueur] && tab[l+2][c-2] == token[joueur] && tab[l+3][c-3] == token[joueur]){
+          printf("Je suis 3");
+          return 1;
+        } 
+      }
+    }
+    for(int c=0; c<3; c++) {
+      for(int l=0; l<2; l++) {
+        if (tab[l][c] == token[joueur] && tab[l+1][c+1] == token[joueur] && tab[l+2][c+2] == token[joueur] && tab[l+3][c+3] == token[joueur]){
+          printf("Je suis 4");
+          return 1;
+        } 
       }
     }
   }
   if (count == 42){
     return 1;
   }
+  printf("Je ressors et rend 0");
   return 0;
 }
 
 void main(void) {
-  // Init du jeu:
-  init();
-  printf("\nFin d'init\n");
-  disp();
-  printf("\nFin de disp\n");
-  // Boucle du jeu:
-  while(statusgame() == 0){
-    printf("\nJ'uis rentré dans la boucle\n");
-    int colonne, code_retour;
-    int i = 7 ;
-    do {
+  int count = 0;
+    // Init du jeu:
+    init();
+    disp();
+    // Boucle du jeu:
+    while(statusgame() == 0){
+      int colonne;
+      int i = 5 ;
       printf("\nOn joue dans quel colonne ?\n");
-      code_retour = scanf("%d", &colonne);
-    } while (0<code_retour<8);{
-        printf("j'uis dans celle là ?");
-        while (tab[i][code_retour] != '.'){
+      scanf("%d", &colonne);
+      if (colonne<=7 && tab[6][colonne] != '.'){
+        while (tab[i][colonne-1] != '.'){
           i --;
         }
-        printf("Et est-ce que j'en sors ?");
-        tab[i][code_retour] = token[joueur];
+        tab[i][colonne-1] = token[joueur];
+        disp();
+        printf("Changement de joueur ! ");
+        joueur = !joueur;
+        count ++;
+      } else {
+        printf("\nVous ne pouvez pas jouer dans cette colonne ! \n");
+        disp();
+        }
     }
-  }
 }
