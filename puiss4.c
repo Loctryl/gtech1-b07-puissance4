@@ -33,7 +33,6 @@ int statusgame(){
   printf("Je rentre dans la status de la game\n");
   int align = 0;
   if (count>6){
-    printf("Je suis dans la condition");
     for(int l=0; l<NBL; l++) {
       for(int c=0; c<5; c++) {
         if (tab[l][c] == token[joueur] && tab[l][c+1] == token[joueur] && tab[l][c+2] == token[joueur] && tab[l][c+3] == token[joueur]){
@@ -70,12 +69,10 @@ int statusgame(){
   if (count == 42){
     return 1;
   }
-  printf("Je ressors et rend 0");
   return 0;
 }
 
 void main(void) {
-  int count = 0;
     // Init du jeu:
     init();
     disp();
@@ -94,6 +91,7 @@ void main(void) {
         printf("Changement de joueur ! ");
         joueur = !joueur;
         count ++;
+        printf("%d \n", count);
       } else {
         printf("\nVous ne pouvez pas jouer dans cette colonne ! \n");
         disp();
