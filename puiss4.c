@@ -15,18 +15,51 @@ void Init(void) {
   }
 }
 
+void red(void){
+  printf("\033[0;31m");
+}
+
+void green(void){
+  printf("\033[0;32m");
+}
+
+void yellow(void){
+  printf("\033[0;33m");
+
+}
+
+void cyan(void){
+  printf("\033[0;36m");
+}
+
+void white(void){
+  printf("\033[0;37m");
+}
+
 void Disp(void){
 
   printf("  _ _ _ _ _ _ _ ");
   for(int l=0; l<NBL; l++) {
     printf(" \n|");
     for(int c=0; c<NBC; c++) {
-      printf(" %c",tab[l][c]);
+      if(tab[l][c] == token[0]){
+        cyan();
+        printf(" %c",tab[l][c]);
+      } else if (tab[l][c] == token[1]){
+        green();
+        printf(" %c",tab[l][c]);
+      } else {
+        white();
+        printf(" %c",tab[l][c]);
+      }
     }
+    white();
     printf(" |");
   }
+  white();
   printf("\n  1 2 3 4 5 6 7 \n");
 }
+
 
 void Empty(void){
   int c = getchar();
@@ -39,7 +72,9 @@ int Verif(int range){
   int save;
   int answer;
   for (;;) {
+    white();
     save = scanf (" %d", &answer);
+    red();
 
     if (save == EOF) {
       fputs ("You didn't write anything...\n", stderr);
@@ -64,7 +99,7 @@ int Verif(int range){
 }
 
 int StatusGame(){
-
+  red();
   if (count>6){
     for(int l=0; l<NBL; l++) {
       for(int c=0; c<5; c++) {
@@ -107,6 +142,7 @@ int StatusGame(){
     printf("\nThe game is full ! Game Over !\n");
     return 1;
   }
+  white();
   return 0;
 }
 
@@ -121,6 +157,7 @@ void main(void) {
 
       int column, i=5;
       player = !player;
+      red();
       printf("\nPlayer %d is playing ! \nWhich column do you choose ?\n",player+1);
       column = Verif(7);
 
@@ -134,24 +171,31 @@ void main(void) {
       }
 
       tab[i][column-1] = token[player];
+      white();
       Disp();
       count ++;
       printf("---------------------\n");
     }
 
     replay = 0;
+    yellow();
     printf("\nDo you want to play again ?\n1 for Yes\n2 for No\n");
+    red();
     replay = Verif(2);
 
     while (replay != 1 && replay != 2){
+      yellow();
       printf("\nDo you want to play again ?\n1 for Yes\n2 for No\n");
+      red();
       replay = Verif(2);
     }
-
+    white();
     if (replay == 1){
       printf("\nAh shit ... here we go again..\n");
     }
     count = 0;
   }
+  red();
   printf("\nGame Over ! See You !\n\n");
+  white();
 }
