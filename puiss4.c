@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #define NBL 6
 #define NBC 7
 
@@ -7,22 +6,6 @@ char tab[NBL][NBC];
 char token [] = "OX";
 int player = 1;
 int count = 0;
-
-
-// Fonction d'allocation mémoire:
-char **tab_malloc() {
-  int lign = 1;
-  int column = 1;
-  // Allocation tableau de "pointeurs sur pointeurs" (1D):
-  char **tab_ = (char**)malloc(lign * sizeof(char*)); // "Les lignes"
-  // Pour chaque pointeur de premier niveau, on alloue un tableau de pointeurs (1D):
-  for(int l=0; l<lign; l++){
-    for(int c=0; c<column; c++){
-      tab[l][c] = '.';
-    }
-  }
-}
-
 //construction du tableau de jeu
 void Init(void) {
   for(int l=0; l<NBL; l++) {
@@ -218,7 +201,7 @@ void main(void) {
     }
     white();
     if (replay == 1){
-      printf("\nAh shit ... here we go again..\n");
+      printf("\nHere we go again..\n");
     }
     count = 0;
   }
